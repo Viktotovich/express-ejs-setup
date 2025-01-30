@@ -4,12 +4,21 @@ const path = require("node:path");
 
 const app = express();
 const PORT = process.env.PORT;
+const assetsPath = path.join(__dirname, "public");
+
+const links = [
+  { href: "/", text: "Home" },
+  { href: "about", text: "About" },
+];
+const users = ["Rose", "Cake", "Biff"];
+
+app.use(express.static(assetsPath));
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  res.render("index", { message: "Ejs is awesome!" });
+  res.render("index", { links: links, users: users });
 });
 
 app.get("/throw", (req, res) => {
