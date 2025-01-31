@@ -10,6 +10,8 @@ const links = [
   { href: "/", text: "Home" },
   { href: "about", text: "About" },
 ];
+
+const github = "https://github.com/Viktotovich";
 const users = ["Rose", "Cake", "Biff"];
 
 app.use(express.static(assetsPath));
@@ -18,7 +20,11 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  res.render("index", { links: links, users: users });
+  res.render("index", { links: links, users: users, github: github });
+});
+
+app.get("/about", (req, res) => {
+  res.render("about", { links: links, github: github });
 });
 
 app.get("/throw", (req, res) => {
