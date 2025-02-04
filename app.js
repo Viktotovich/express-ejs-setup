@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const path = require("node:path");
+const { body, validationResult } = require("express-validator");
 
 const app = express();
 const PORT = process.env.PORT;
@@ -15,12 +16,14 @@ const github = "https://github.com/Viktotovich";
 const users = ["Rose", "Cake", "Biff"];
 
 app.use(express.static(assetsPath));
+/*Allows to access and use req params */
+app.use(express.urlencoded({ extended: true }));
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  res.render("index", { links: links, users: users, github: github });
+  res.render("pages/index", { links: links, users: users, github: github });
 });
 
 app.get("/about", (req, res) => {
